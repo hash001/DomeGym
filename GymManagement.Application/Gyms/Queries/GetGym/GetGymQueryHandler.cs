@@ -2,7 +2,7 @@
 using GymManagement.Application.Common.Interfaces;
 using MediatR;
 
-namespace GymManagement.Application.Gym.Queries.GetGym;
+namespace GymManagement.Application.Gyms.Queries.GetGym;
 
 public class GetGymQueryHandler : IRequestHandler<GetGymQuery, ErrorOr<Domain.Gyms.Gym>> 
 {

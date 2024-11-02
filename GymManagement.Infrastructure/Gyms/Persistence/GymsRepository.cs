@@ -1,50 +1,51 @@
 ﻿using GymManagement.Application.Common.Interfaces;
 using GymManagement.Domain.Gyms;
 using GymManagement.Infrastructure.Common.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.Infrastructure.Gyms.Persistence;
 
 public class GymsRepository : IGymsRepository
 {
-    private readonly GymManagementDbContext _gymManagementDbContext;
+    private readonly GymManagementDbContext _dbContext;
 
-    public GymsRepository(GymManagementDbContext gymManagementDbContext)
+    public GymsRepository(GymManagementDbContext dbContext)
     {
-        _gymManagementDbContext = gymManagementDbContext;
+        _dbContext = dbContext;
     }
     
     public async Task AddGymAsync(Gym gym)
     {
-        await _gymManagementDbContext.Gyms.AddAsync(gym);
+        await _dbContext.Gyms.AddAsync(gym);
     }
 
-    public Task<Gym?> GetByIdAsync(Guid id)
+    public async Task<Gym?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Gyms.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<bool> ExistsAsync(Guid id)
+    public async Task<bool> ExistsAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Gyms.AsNoTracking().AnyAsync(x => x.Id == id);
     }
 
-    public Task<List<Gym>> ListBySubscriptionIdAsync(Guid subscriptionId)
+    public async Task<List<Gym>> ListBySubscriptionIdAsync(Guid subscriptionId)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Gyms.Where(x => x.SubscriptionId == subscriptionId).ToListAsync();
     }
 
-    public Task UpdateGymAsync(Gym gym)
+    public void UpdateGym(Gym gym)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(gym);
     }
 
-    public Task RemoveGymAsync(Gym gym)
+    public void RemoveGym(Gym gym)
     {
-        throw new NotImplementedException();
+        _dbContext.Remove(gym);
     }
 
-    public Task RemoveRangeAsync(List<Gym> gyms)
+    public void RemoveRange(List<Gym> gyms)
     {
-        throw new NotImplementedException();
+        _dbContext.RemoveRange(gyms);
     }
 }

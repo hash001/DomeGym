@@ -1,9 +1,8 @@
 ﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
-using GymManagement.Domain.Subscriptions;
 using MediatR;
 
-namespace GymManagement.Application.Gym.Commands.CreateGym;
+namespace GymManagement.Application.Gyms.Commands.CreateGym;
 
 public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr<Domain.Gyms.Gym>>
 {
@@ -36,7 +35,7 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
             return addGymResult.Errors;
         }
 
-        await _subscriptionsRepository.UpdateAsync(subscription);
+        _subscriptionsRepository.Update(subscription);
         
         await _gymsRepository.AddGymAsync(gym);
 
