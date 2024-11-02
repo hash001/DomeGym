@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.Infrastructure.Admins.Persistence;
 
-public class AdminsRepository : IAdminRepository
+public class AdminsesRepository : IAdminsRepository
 {
     private readonly GymManagementDbContext _dbContext;
 
-    public AdminsRepository(GymManagementDbContext dbContext)
+    public AdminsesRepository(GymManagementDbContext dbContext)
     {
         _dbContext = dbContext;
     }

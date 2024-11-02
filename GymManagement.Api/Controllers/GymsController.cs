@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Api.Controllers;
 
-[Route("[controller]")]
+[Route("subscriptions/{subscriptionId:guid}/gyms")]
 public class GymsController : ApiController
 {
     private readonly ISender _mediator;
@@ -19,7 +19,7 @@ public class GymsController : ApiController
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost()]
     public async Task<IActionResult> CreateGym(CreateGymRequest createGymRequest, Guid subscriptionId)
     {
         if (string.IsNullOrWhiteSpace(createGymRequest.Name))

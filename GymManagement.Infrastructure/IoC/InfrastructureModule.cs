@@ -15,7 +15,7 @@ public static class InfrastructureModule
     {
         services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
         services.AddScoped<IGymsRepository, GymsRepository>();
-        services.AddScoped<IAdminRepository, AdminsRepository>();
+        services.AddScoped<IAdminsRepository, AdminsesRepository>();
         services.AddDbContext<GymManagementDbContext>(options => options.UseSqlite("Data Source=GymManagement.db"));
         services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<GymManagementDbContext>());
         return services;

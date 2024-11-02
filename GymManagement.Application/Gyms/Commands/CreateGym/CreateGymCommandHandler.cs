@@ -19,7 +19,7 @@ public class CreateGymCommandHandler : IRequestHandler<CreateGymCommand, ErrorOr
     }
 
     public async Task<ErrorOr<Domain.Gyms.Gym>> Handle(CreateGymCommand request, CancellationToken cancellationToken)
-    {
+    {        
         var subscription = await _subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
         if (subscription is null)
         {

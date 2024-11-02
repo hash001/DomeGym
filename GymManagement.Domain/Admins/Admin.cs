@@ -12,11 +12,15 @@ public class Admin
         Id = id ?? Guid.NewGuid();
     }
 
+    private Admin()
+    {
+    }
+
     public Guid UserId { get; }
 
     public Guid? SubscriptionId { get; private set; }
 
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
 
     public void SetSubscription(Subscription subscription)
     {
